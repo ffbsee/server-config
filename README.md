@@ -1,13 +1,16 @@
-Freifunk-Ulm Server
+Freifunk-Bodensee Server
 ===============
+ACHTUNG! Das ist nur ein ganz frischer, schlechter Fork der ffulm server config.
+Funktioniert noch nicht fuer ffbsee und ist nur ein ganz frischer Anfang.
 
-Scripte und Konfigurationsdateien zum schnellen Einrichten eines Servers für Freifunk-Ulm.
+
+Scripte und Konfigurationsdateien zum schnellen Einrichten eines Servers für Freifunk-Bodensee.
 Vorausgesetzt wird eine Debian 8 Installation (Jessie).
 Um einen Server einzurichten, reicht es, das Script "setup_server.sh" als Benutzer 'root' auszuführen:
 
 ```
 apt-get install git
-git clone https://github.com/ffulm/server-config.git
+git clone https://github.com/ffbsee/server-config.git
 cd server-config
 ./setup_server.sh
 ```
@@ -50,15 +53,15 @@ Alle Serverbetreiber müssen sich absprechen, was den Bereich der verteilten DHC
  * vpn5: 10.33.80.1 range 10.33.80.2 10.33.83.255
  * vpn6: 10.33.84.1 range 10.33.84.2 10.33.87.255
  
-Innerhalb des Freifunknetzes gibt es die DNS Zone ".ffulm". D.h. es können auch Namen wie "meinserver.ffulm" aufgelöst werden. Masterserver dafür ist zur Zeit vpn5.
-Falls weitere Server hinzugefügt werden, müssen die Zonendateien auf dem Master (db.10.33, db.ffulm, named.conf.local) manuell angepasst werden. Hierzu bitte auf der Mailingliste melden.
+Innerhalb des Freifunknetzes gibt es die DNS Zone ".ffbsee". D.h. es können auch Namen wie "meinserver.ffbsee" aufgelöst werden. Masterserver dafür ist zur Zeit vpn5.
+Falls weitere Server hinzugefügt werden, müssen die Zonendateien auf dem Master (db.10.33, db.ffbsee, named.conf.local) manuell angepasst werden. Hierzu bitte auf der Mailingliste melden.
 
 ### alfred
 Des Weiteren sollte mindestens ein Server mit dem Schalter "-m" als alfred master betrieben werden. Zur Zeit ist dies vpn6.
-https://github.com/ffulm/server-config/blob/master/freifunk/update.sh#L121
+https://github.com/ffbsee/server-config/blob/master/freifunk/update.sh#L121
 
 ### Netz
-Freifunk Ulm nutzt folgende Netze:
+Freifunk Bodensee nutzt folgende Netze:
  * ipv4: ```10.33.0.0/16```
  * ipv6: ```fdef:17a0:fff1::/48```
  
@@ -77,18 +80,9 @@ Dann unter /etc/munin.conf anpassen und alle clients eintragen:
 #[localhost.localdomain]
 #    address 127.0.0.1
 #    use_node_name yes
-[vpn1.ffulm]
+[vpn1.ffbsee]
      address 10.33.64.1
-[vpn2.ffulm]
-     address 10.33.68.1
-[vpn3.ffulm]
-     address 10.33.72.1
-[vpn4.ffulm]
-     address 10.33.76.1
-[vpn5.ffulm]
-     address 127.0.0.1
-[vpn6.ffulm]
-     address 10.33.84.1
+
 ```
 Daemon neustarten
 ```
@@ -97,7 +91,7 @@ Daemon neustarten
 
 ICVPN
 -----
-Folgende Adressen wurden im [Transfernetz des ICVPN] (https://github.com/freifunk/icvpn-meta/blob/master/ulm) für die Ulmer community reserviert:
+Folgende Adressen wurden im [Transfernetz des ICVPN] (https://github.com/freifunk/icvpn-meta/blob/master/Bodensee) für die Bodenseeer community reserviert:
 
 vpn5
  * ipv4: ```10.207.0.105```
@@ -131,15 +125,15 @@ cd "$DATADIR"
 git pull -q
 
 # refresh bgp config v4/v6
-sudo -u nobody /opt/icvpn-scripts/mkbgp -4 -f bird -d peers -s "$DATADIR" -x ulm > /etc/bird/bird.d/icvpn.conf
-sudo -u nobody /opt/icvpn-scripts/mkbgp -6 -f bird -d peers -s "$DATADIR" -x ulm -t berlin:upstream > /etc/bird/bird6.d/icvpn.conf
+sudo -u nobody /opt/icvpn-scripts/mkbgp -4 -f bird -d peers -s "$DATADIR" -x Bodensee > /etc/bird/bird.d/icvpn.conf
+sudo -u nobody /opt/icvpn-scripts/mkbgp -6 -f bird -d peers -s "$DATADIR" -x Bodensee -t berlin:upstream > /etc/bird/bird6.d/icvpn.conf
 
 # reload bird v4/v6
 birdc configure > /dev/null
 birdc6 configure > /dev/null
 
 # refresh DNS config for freifunk zones
-sudo -u nobody /opt/icvpn-scripts/mkdns -f bind -s "$DATADIR" -x ulm > /etc/bind/named.conf.freifunk
+sudo -u nobody /opt/icvpn-scripts/mkdns -f bind -s "$DATADIR" -x Bodensee > /etc/bind/named.conf.freifunk
 
 # reload bind9 config
 /etc/init.d/bind9 reload > /dev/null
