@@ -46,15 +46,11 @@ Durch die Reaktivierung von IPv4 im Freifunk Netz werden weitere Dienste benöti
 
 Alle Serverbetreiber müssen sich absprechen, was den Bereich der verteilten DHCP Adressen angeht, damit es zu keinen Adresskonflikten kommt. Bisher wurden folgende Bereiche vergeben:
 
- * vpn1: 10.33.64.1 range 10.33.64.2 10.33.67.255
- * vpn2: 10.33.68.1 range 10.33.68.2 10.33.71.255
- * vpn3: 10.33.72.1 range 10.33.72.2 10.33.75.255
- * vpn4: 10.33.76.1 range 10.33.76.2 10.33.79.255
- * vpn5: 10.33.80.1 range 10.33.80.2 10.33.83.255
- * vpn6: 10.33.84.1 range 10.33.84.2 10.33.87.255
+ * vpn1: unklar range unklar unklar
+ 
  
 Innerhalb des Freifunknetzes gibt es die DNS Zone ".ffbsee". D.h. es können auch Namen wie "meinserver.ffbsee" aufgelöst werden. Masterserver dafür ist zur Zeit vpn5.
-Falls weitere Server hinzugefügt werden, müssen die Zonendateien auf dem Master (db.10.33, db.ffbsee, named.conf.local) manuell angepasst werden. Hierzu bitte auf der Mailingliste melden.
+Falls weitere Server hinzugefügt werden, müssen die Zonendateien auf dem Master (db.10.unklar, db.ffbsee, named.conf.local) manuell angepasst werden. Hierzu bitte auf der Mailingliste melden.
 
 ### alfred
 Des Weiteren sollte mindestens ein Server mit dem Schalter "-m" als alfred master betrieben werden. Zur Zeit ist dies vpn6.
@@ -62,8 +58,8 @@ https://github.com/ffbsee/server-config/blob/master/freifunk/update.sh#L121
 
 ### Netz
 Freifunk Bodensee nutzt folgende Netze:
- * ipv4: ```10.33.0.0/16```
- * ipv6: ```fdef:17a0:fff1::/48```
+ * ipv4: ```unklar/```
+ * ipv6: ```unklar/```
  
 Durchsatz und Statistiken
 -----
@@ -81,7 +77,7 @@ Dann unter /etc/munin.conf anpassen und alle clients eintragen:
 #    address 127.0.0.1
 #    use_node_name yes
 [vpn1.ffbsee]
-     address 10.33.64.1
+     address unklar
 
 ```
 Daemon neustarten
@@ -91,11 +87,11 @@ Daemon neustarten
 
 ICVPN
 -----
-Folgende Adressen wurden im [Transfernetz des ICVPN] (https://github.com/freifunk/icvpn-meta/blob/master/Bodensee) für die Bodenseeer community reserviert:
+Folgende Adressen wurden NOCH NICHT im [Transfernetz des ICVPN] (https://github.com/freifunk/icvpn-meta/blob/master/bodensee) für die Bodensee community reserviert:
 
-vpn5
- * ipv4: ```10.207.0.105```
- * ipv6: ```fec0::a:cf:0:96```
+vpn1
+ * ipv4: ```unklar```
+ * ipv6: ```unklar```
 
 Doku zu ICVPN bei FF Bielefeld: (veraltet)
 https://wiki.freifunk-bielefeld.de/doku.php?id=ic-vpn
@@ -125,15 +121,15 @@ cd "$DATADIR"
 git pull -q
 
 # refresh bgp config v4/v6
-sudo -u nobody /opt/icvpn-scripts/mkbgp -4 -f bird -d peers -s "$DATADIR" -x Bodensee > /etc/bird/bird.d/icvpn.conf
-sudo -u nobody /opt/icvpn-scripts/mkbgp -6 -f bird -d peers -s "$DATADIR" -x Bodensee -t berlin:upstream > /etc/bird/bird6.d/icvpn.conf
+sudo -u nobody /opt/icvpn-scripts/mkbgp -4 -f bird -d peers -s "$DATADIR" -x bodensee > /etc/bird/bird.d/icvpn.conf
+sudo -u nobody /opt/icvpn-scripts/mkbgp -6 -f bird -d peers -s "$DATADIR" -x bodensee -t berlin:upstream > /etc/bird/bird6.d/icvpn.conf
 
 # reload bird v4/v6
 birdc configure > /dev/null
 birdc6 configure > /dev/null
 
 # refresh DNS config for freifunk zones
-sudo -u nobody /opt/icvpn-scripts/mkdns -f bind -s "$DATADIR" -x Bodensee > /etc/bind/named.conf.freifunk
+sudo -u nobody /opt/icvpn-scripts/mkdns -f bind -s "$DATADIR" -x bodensee > /etc/bind/named.conf.freifunk
 
 # reload bind9 config
 /etc/init.d/bind9 reload > /dev/null
