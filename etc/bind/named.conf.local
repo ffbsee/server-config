@@ -6,14 +6,14 @@
 // organization
 //include "/etc/bind/zones.rfc1918";
 
-zone "ffulm" {
+zone "ffbsee" {
         type slave;
-        file "/etc/bind/db.ffulm";
-        masters { 10.33.80.1; };
+        file "/etc/bind/db.ffbsee";
+        masters { 10.11.160.1; };
 };
 
-zone "33.10.in-addr.arpa" {
+zone "160.11.10.in-addr.arpa" {
         type slave;
-        file "/etc/bind/db.10.33";
-        masters { 10.33.80.1; };
+        file "/etc/bind/db.10.11.160";
+        masters { 10.11.160.1; };
 };

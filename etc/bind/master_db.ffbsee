@@ -1,0 +1,17 @@
+$TTL    604800
+@       IN      SOA     vpn1.ffbsee. kommunikation@ffbsee.de. (
+		30	; Serial
+             604800	; Refresh
+              86400	; Retry
+            2419200	; Expire
+             604800 )	; Negative Cache TTL
+;
+; name servers - NS records
+@					IN      NS	vpn1.ffbsee.
+
+; name servers - A records
+vpn1.ffbsee.				IN	A	10.11.160.1
+
+; 10.11.160.0/20 - A records
+monitor.ffbsee.    			IN      A	10.11.160.101
+testsrv.ffbsee.    			IN      CNAME	monitor.ffbsee.

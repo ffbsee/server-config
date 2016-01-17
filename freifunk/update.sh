@@ -12,7 +12,7 @@ ipv4_mesh_interface=""
 geo=""
 name="$(hostname)"
 firmware="server"
-community="ulm"
+community="bodensee"
 webserver="true" #start webserver, create map/status/status page
 gateway="false" #start OpenVPN, bind, tayga, radvd, DHCP, batman gateway mode
 statistics="true" #start and setup statistical output
@@ -149,7 +149,7 @@ fi
 	nd=0
 	for entry in $(cat /sys/kernel/debug/batman_adv/bat0/originators |  tr '\t/[]()' ' ' |  awk '{ if($1==$4) print($1, $3, $5) }'); do
 		[ $nd -eq 0 ] && nd=1 || echo -n ", "
-		IFS=" "
+		IFS[<0;76;19M=" "
 		printLink $entry
 	done
 
