@@ -57,9 +57,9 @@ Des Weiteren sollte mindestens ein Server mit dem Schalter "-m" als alfred maste
 https://github.com/ffbsee/server-config/blob/master/freifunk/update.sh#L121
 
 ### Netz
-Freifunk Bodensee nutzt folgende Netze:
- * ipv4: ```unklar/```
- * ipv6: ```unklar/```
+Freifunk Bodensee nutzt folgende Netze (pull request beim icvpn noch nicht durch):
+ * ipv4: ```10.11.160.0/20```
+ * ipv6: ```fdef:1701:b5ee::/48```
  
 Durchsatz und Statistiken
 -----
@@ -77,7 +77,7 @@ Dann unter /etc/munin.conf anpassen und alle clients eintragen:
 #    address 127.0.0.1
 #    use_node_name yes
 [vpn1.ffbsee]
-     address unklar
+     address 10.11.160.1
 
 ```
 Daemon neustarten
@@ -90,8 +90,8 @@ ICVPN
 Folgende Adressen wurden NOCH NICHT im [Transfernetz des ICVPN] (https://github.com/freifunk/icvpn-meta/blob/master/bodensee) für die Bodensee community reserviert:
 
 vpn1
- * ipv4: ```unklar```
- * ipv6: ```unklar```
+ * ipv4: ```10.11.160.1```
+ * ipv6: ```fded:1701:b5ee:1```
 
 Doku zu ICVPN bei FF Bielefeld: (veraltet)
 https://wiki.freifunk-bielefeld.de/doku.php?id=ic-vpn
