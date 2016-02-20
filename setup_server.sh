@@ -12,6 +12,7 @@ wan_iface="eth0"
 #The community identifier.
 community_id="bodensee"
 community_name="Bodensee"
+community_shortname="ffbsee"
 
 #The internal IPv6 prefix
 ff_prefix="fdef:1701:b5ee:42::"
@@ -151,7 +152,7 @@ if [ "$setup_webserver" = "true" ]; then
 		git clone https://github.com/freifunk-bielefeld/ffmap-d3.git
 		cd ffmap-d3
 		sed -i "s/ffbi-/ffbsee-/g" config.js
-		sed -i "s/gotham.freifunk.net/www.freifunk-$community_id.de/g" config.js
+		sed -i "s/gotham.freifunk.net/$community_shortname.de/g" config.js
 		sed -i "s/gotham/$community_id/g" config.js
 		sed -i "s/Gotham/$community_name/g" config.js
 		sed -i "s/fdef:1701:b5ee:42::/$ff_prefix/g" config.js
