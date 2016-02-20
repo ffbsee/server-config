@@ -52,7 +52,7 @@ Innerhalb des Freifunknetzes gibt es die DNS Zone ".ffbsee". D.h. es können auc
 Falls weitere Server hinzugefügt werden, müssen die Zonendateien auf dem Master (db.10.unklar, db.ffbsee, named.conf.local) manuell angepasst werden. Hierzu bitte auf der Mailingliste melden.
 
 ### alfred
-Des Weiteren sollte mindestens ein Server mit dem Schalter "-m" als alfred master betrieben werden. Zur Zeit ist dies vpn6.
+Des Weiteren sollte mindestens ein Server mit dem Schalter "-m" als alfred master betrieben werden. Zur Zeit ist dies bei uns vpn1.
 https://github.com/ffbsee/server-config/blob/master/freifunk/update.sh#L121
 
 ### Netz
