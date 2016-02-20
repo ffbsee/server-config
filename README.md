@@ -1,7 +1,6 @@
 Freifunk-Bodensee Server
 ===============
-ACHTUNG! Das ist nur ein ganz frischer, schlechter Fork der ffulm server config.
-Funktioniert noch nicht fuer ffbsee und ist nur ein ganz frischer Anfang.
+ACHTUNG! Bitte sprich uns zuerst im IRC an, bevor Du einen Server aufsetzt! Wir müssen mit jedem neuen Serverbetreiber einige Dinge, wie z.B. DHCPD Ranges usw. besprechen!
 
 
 Scripte und Konfigurationsdateien zum schnellen Einrichten eines Servers für Freifunk-Bodensee.
