@@ -42,6 +42,7 @@ ipv4_mesh_interface=""
 ipv4_dhcp_range=""
 
 #Set to 1 for this script to run. :-)
+# Make sure to set content of /etc/hostname to vpnX.ffbsee.de scheme
 run=0
 
 #####################################
@@ -129,12 +130,15 @@ if [ "$setup_webserver" = "true" ]; then
 	{
 		echo "(I) Install lighttpd"
 		apt-get install --assume-yes lighttpd
+		# generate strong DH primes
+		openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
 	}
 
 	{
 		echo "(I) Create /etc/lighttpd/lighttpd.conf"
 		cp etc/lighttpd/lighttpd.conf /etc/lighttpd/
 		sed -i "s/fdef:1701:b5ee:42::1/$ip_addr/g" /etc/lighttpd/lighttpd.conf
+		sed -i "s/SERVERNAME/$(hostname)/g" /etc/lighttpd/lighttpd.conf
 	}
 
 	if ! id www-data >/dev/null 2>&1; then
@@ -162,6 +166,26 @@ if [ "$setup_webserver" = "true" ]; then
 		rm -rf ffmap-d3
 
 		chown -R www-data:www-data /var/www
+	}
+
+	{
+		# get letsencrypt client
+		echo "(I) Populate /opt/letsencrypt/"
+		git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt/
+		# copy cert renewal script
+		cp -r opt/letsencrypt/* /opt/letsencrypt/
+		mkdir -p /var/log/letsencrypt/
+		touch /var/log/letsencrypt/renew.log
+
+		# call once to get initial cert
+		echo "(I) Get Letsencrypt Certificate... This can take some time!"
+		/opt/letsencrypt/check_update_ssl.sh
+
+		# add letsencrypt certificate renewal script to crontab
+		if [ -z "$(cat /etc/crontab | grep '/opt/letsencrypt/check_update_ssl.sh')" ]; then
+			echo "(I) Add certificate check entry to /etc/crontab"
+			echo '0 3 * * * * root /opt/letsencrypt/check_update_ssl.sh > /dev/null' >> /etc/crontab
+		fi
 	}
 
 	sed -i "s/webserver=\".*\"/webserver=\"true\"/g" /opt/freifunk/update.sh
@@ -201,7 +225,7 @@ if [ "$setup_icvpn_dns" = "true" ]; then
 fi
 
 if [ -z "$(cat /etc/crontab | grep '/opt/freifunk/update.sh')" ]; then
-	echo "(I) Add entry to /etc/crontab"
+	echo "(I) Add update.sh entry to /etc/crontab"
 	echo '*/5 * * * * root /opt/freifunk/update.sh > /dev/null' >> /etc/crontab
 fi
 
