@@ -30,6 +30,10 @@
 -A FORWARD -i bat0 -o nat64 -j ACCEPT
 -A FORWARD -i nat64 -o bat0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+# allow fastd
+-A INPUT -p tcp -m tcp --dport 1244 -j ACCEPT
+-A INPUT -p udp -m udp --dport 1244 -j ACCEPT
+
 COMMIT
 *nat
 :PREROUTING ACCEPT [22:5968]
