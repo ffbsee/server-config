@@ -1,6 +1,6 @@
 #!/bin/sh
 service lighttpd stop
-if ! /opt/letsencrypt/letsencrypt-auto certonly -tvv --standalone --keep -d $(hostname) > /var/log/letsencrypt/renew.log 2>&1 ; then
+if ! /opt/letsencrypt/letsencrypt-auto --server https://acme-v01.api.letsencrypt.org/directory auth --standalone --keep -d $(hostname) > /var/log/letsencrypt/renew.log 2>&1 ; then
     echo Automated renewal failed:
     cat /var/log/letsencrypt/renew.log
     exit 1
