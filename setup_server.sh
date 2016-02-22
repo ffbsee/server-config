@@ -467,6 +467,9 @@ if [ "$setup_gateway" = "true" ]; then
 
         # statistics
         if [ "$setup_statistics" = "true" ]; then
+          #make sure tun0 is actually there for next command to work
+          service openvpn start
+          sleep 23
           # add vnstat interface for tun0
           vnstat -u -i tun0
 	  # grant access for vnstat
