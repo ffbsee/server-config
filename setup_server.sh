@@ -159,7 +159,7 @@ if [ "$setup_webserver" = "true" ]; then
 		sed -i "s/gotham.freifunk.net/$community_shortname.de/g" config.js
 		sed -i "s/gotham/$community_id/g" config.js
 		sed -i "s/Gotham/$community_name/g" config.js
-		sed -i "s/fdef:1701:b5ee:42::/$ff_prefix/g" config.js
+		sed -i "s/fdef:17a0:ffb1:300::/$ff_prefix/g" config.js
 		make
 		cp -r www/* /var/www/
 		cd ..
