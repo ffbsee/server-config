@@ -70,7 +70,10 @@ do
     echo -e "$user ist in der Gruppe $ff_admin_group\n"
   else
     echo -e "$user wird der Gruppe $ff_admin_group hinzugefuegt\n"
-	usermod -aG $ff_admin_group $user 
+	if $execute_script == "true"; then
+	  usermod -aG $ff_admin_group $user
+    else echo "!! Script wird nicht ausgeführt"
+    fi		
   fi
 done
 
