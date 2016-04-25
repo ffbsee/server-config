@@ -160,6 +160,9 @@ if [ "$setup_webserver" = "true" ]; then
 		sed -i "s/gotham/$community_id/g" config.js
 		sed -i "s/Gotham/$community_name/g" config.js
 		sed -i "s/fdef:17a0:ffb1:300::/$ff_prefix/g" config.js
+		sed -i '34a\        <a href="https://vpn3.ffbsee.de/cgi-bin/live_logo/status.pl">Status</a></li>' www/list.html
+		sed -i '16a\        <a href="https://vpn3.ffbsee.de/cgi-bin/live_logo/status.pl">Status</a></li>' www/graph.html
+		sed -i '56a\        <a href="https://vpn3.ffbsee.de/cgi-bin/live_logo/status.pl">Status</a></li>' www/geomap.html
 		make
 		cp -r www/* /var/www/
 		cd ..
