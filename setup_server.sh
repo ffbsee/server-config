@@ -172,6 +172,8 @@ if [ "$setup_webserver" = "true" ]; then
 	}
 
 	{
+		# remove remains
+		rm -rf /opt/letsencrypt/
 		# get letsencrypt client
 		echo "(I) Populate /opt/letsencrypt/"
 		git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt/
