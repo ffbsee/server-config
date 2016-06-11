@@ -443,17 +443,17 @@ if [ "$setup_gateway" = "true" ]; then
 		sed -i "s/DNS_SERVER/$ipv4_mesh_interface/g" /etc/openvpn/update-route
 	}
 
-	#NAT64
-	{
-		echo "(I) Install tayga."
-		apt-get install --assume-yes tayga
+	#we do not use NAT64 right now
+	#{
+	#	echo "(I) Install tayga."
+	#	apt-get install --assume-yes tayga
 
 		#enable tayga
-		sed -i 's/RUN="no"/RUN="yes"/g' /etc/default/tayga
+	#	sed -i 's/RUN="no"/RUN="yes"/g' /etc/default/tayga
 
-		echo "(I) Configure tayga"
-		cp -r etc/tayga.conf /etc/
-	}
+	#	echo "(I) Configure tayga"
+	#	cp -r etc/tayga.conf /etc/
+	#}
 
 	#DNS64
 	{
