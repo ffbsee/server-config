@@ -180,7 +180,7 @@ if [ "$webserver" = "true" ]; then
 	./status_page_create.sh '/var/www/index.html'
 
 	#update nodes/clients/gateways counter
-	./counter_update.py '/var/www/nodes.json' '/var/www/counter.svg'
+	./counter_update.py '/var/www/meshviewer/nodes.json' '/var/www/counter.svg'
 
 	# statistics
 	if [ "$statistics" = "true" ]; then
