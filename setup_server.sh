@@ -115,7 +115,7 @@ apt-get update
 
 {
 	echo "(I) Create /opt/freifunk/"
-	apt-get install --assume-yes python3 python3-jsonschema
+	apt-get install --assume-yes python3 python3-jsonschema jq
 	cp -rf freifunk /opt/
 	
 	# transfer several constants to update.sh
