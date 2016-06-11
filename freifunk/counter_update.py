@@ -68,7 +68,7 @@ def main(argv):
 		if not element["flags"].get("online", False):
 			continue
 
-		if community and community != element.["nodeinfo"]["system"]get("site_code", None):
+		if community and community != element["nodeinfo"]["system"].get("site_code", None):
 			continue
 
 		node_counter += 1
