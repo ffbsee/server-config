@@ -168,8 +168,13 @@ if [ "$webserver" = "true" ]; then
 	#collect all map pieces
 	alfred -r 64 -u /var/run/alfred/alfred.sock > /tmp/maps.txt
 
-	#create map data
-	./ffmap-backend.py -m /tmp/maps.txt -a ./aliases.json > /var/www/nodes.json
+	#old system create map data
+	#./ffmap-backend.py -m /tmp/maps.txt -a ./aliases.json > /var/www/nodes.json
+	
+	#New meshviewer based system
+	./map-backend.py -m /tmp/maps.txt --meshviewer-nodes /var/www/meshviewer/nodes.json --meshviewer-graph /var/www/meshviewer/graph.json
+        #make old list.html work
+        jq -n -f /opt/freifunk/ffmap-d3.jq --argfile nodes /var/www/meshviewer/nodes.json --argfile graph /var/www/meshviewer/graph.json > /var/www/nodes.json	
 
 	#update FF-Internal status page
 	./status_page_create.sh '/var/www/index.html'
