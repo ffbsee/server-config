@@ -1,3 +1,3 @@
-key "";
+key "961b675cf8844e756dee9bd9f138a380f717d67e8bdef930435ba31890c179ac";
 float no;
-remote "vpn1.ffbsee.de" port 1244;
+remote "speedtest.vpn1.ffbsee.de" port 1244;

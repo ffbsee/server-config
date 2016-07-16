@@ -1,3 +1,3 @@
 key "696b6fbfa5f1cc1a8a85c78276b55448d0cb89ed9d52f30234f02a811f7132d0";
 float no;
-remote "vpn4.ffbsee.de" port 1244;
+remote "speedtest.vpn4.ffbsee.de" port 1244;
