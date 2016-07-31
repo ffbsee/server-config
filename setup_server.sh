@@ -158,7 +158,7 @@ if [ "$setup_webserver" = "true" ]; then
 		apt-get install --assume-yes make git
 		mkdir -p /var/www/meshviewer/
                 apt-get install --assume-yes git npm nodejs-legacy ruby-sass
-                git clone https://github.com/freifunk-bielefeld/meshviewer.git
+                git clone https://github.com/ffbsee/meshviewer.git
                 cd meshviewer
                 npm install
                 npm install grunt-cli
