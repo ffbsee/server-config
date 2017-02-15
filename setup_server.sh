@@ -112,6 +112,8 @@ fi
 
 echo "(I) Update package database"
 apt-get update
+echo "(I) Install some basic packages"
+apt-get install --assume-yes haveged vim nmap
 
 {
 	echo "(I) Create /opt/freifunk/"
