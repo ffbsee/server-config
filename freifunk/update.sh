@@ -224,11 +224,6 @@ if [ "$gateway" = "true" ]; then
 	batctl gw_mode server
 fi
 #Liste Update:
-if [ ! /var/www/FFNodeList/generateList.pl ]; then
-    git clone https://github.com/ffbsee/FFNodeList.git
-    mv FFNodeList /var/www/
-    echo '0 0 * * * root cd /var/www/FFNodeList; git pull > /dev/null' >> /etc/crontab
-fi
 /var/www/FFNodeList/generateList.pl
 echo "update done"
 
