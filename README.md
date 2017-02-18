@@ -14,7 +14,7 @@ apt-get install --assume-yes git vim tmux
 echo "syntax on" > ~/.vimrc
 git clone https://github.com/ffbsee/server-config.git
 cd server-config
-vim setup-server.sh
+vim setup_server.sh
 ```
 
 Nun sollten die Einstellungen in den ersten Zeilen des Scriptes überprüft werden und der private fastd Key eingetragen werden.
