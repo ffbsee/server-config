@@ -5,14 +5,25 @@ ACHTUNG! Bitte sprich uns zuerst im IRC an, bevor Du einen Server aufsetzt! Wir 
 
 Scripte und Konfigurationsdateien zum schnellen Einrichten eines Servers für Freifunk-Bodensee.
 Vorausgesetzt wird eine Debian 8 Installation (Jessie).
-Um einen Server einzurichten, reicht es, das Script "setup_server.sh" als Benutzer 'root' auszuführen:
+**WICHTIG** ist, dass der Hostname des Servers richtig gesetzt ist. zum Beispiel  `vpn?.ffbsee.de`, wobei ? durch eine Uahl zu ersetzen ist.
+Um einen Server einzurichten, reicht es, das Script '**setup_server.sh**' als Benutzer '**root**' auszuführen:
 
-```
-apt-get install git
+```bash
+apt-get update; apt-get upgrade
+apt-get install git, vim, tmux
+echo "syntax on" > ~/.vimrc
 git clone https://github.com/ffbsee/server-config.git
 cd server-config
-./setup_server.sh
+vim setup-server.sh
 ```
+
+Nun sollten die Einstellungen in den ersten Zeilen des Scriptes überprüft werden und der private fastd Key eingetragen werden.
+
+Als nächstes wird die Installation in einem [tmux](https://linux.die.net/man/1/tmux) fenster gestartet:
+```bash
+tmux new-session ./setup_server.sh
+```
+*In eine tmux session können auch mehrere User "attachen" (beitreten). So teilen sich die User eine Komandozeile und jeder sieht, was der andere macht. Mit `tmux new-session` startet man eine neue Session. Mit `tmux a` betritt man eine aktive Session. In einer tmux Session kann man mit dem drücken von `Strg+B  D` die Session wieder verlassen. Und mit `exit` wird die Session beeendet.*
 
 Nach erfolgreichem Einrichten wird das Script "/opt/freifunk/update.sh" alle 5 Minuten
 von crond aufgerufen. Dadurch wird die Karte regelmäßig aktualisiert und nach
@@ -43,9 +54,9 @@ Für die Gatewayfunktion werden folgende Programme installiert und automatisch k
 Durch die Reaktivierung von IPv4 im Freifunk Netz werden weitere Dienste benötigt:
  * DHCP (isc-dhcp-server)
 
-Alle Serverbetreiber müssen sich absprechen, was den Bereich der verteilten DHCP Adressen angeht, damit es zu keinen Adresskonflikten kommt. Bisher wurden folgende Bereiche vergeben:
+Alle Serverbetreiber müssen sich absprechen, was den Bereich der verteilten DHCP Adressen angeht, damit es zu keinen Adresskonflikten kommt. Dies ist in unserem Wiki zu Dokumentieren:
 
- * vpn1: unklar range unklar unklar
+[Wiki](http://ffbsee.de/doku.php?id=technik:ipspace) *Möglicherweise sind alle DHCP Poole aufgebraucht*
  
  
 Innerhalb des Freifunknetzes gibt es die DNS Zone ".ffbsee". D.h. es können auch Namen wie "meinserver.ffbsee" aufgelöst werden. Masterserver dafür ist zur Zeit vpn5.
