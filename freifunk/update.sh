@@ -149,7 +149,7 @@ fi
 	nd=0
 	for entry in $(cat /sys/kernel/debug/batman_adv/bat0/originators |  tr '\t/[]()' ' ' |  awk '{ if($1==$4) print($1, $3, $5) }'); do
 		[ $nd -eq 0 ] && nd=1 || echo -n ", "
-		IFS[<0;76;19M=" "
+		IFS=" "
 		printLink $entry
 	done
 
@@ -223,6 +223,12 @@ if [ "$gateway" = "true" ]; then
 	# Activate the gateway announcements on a node that has a DHCP server running
 	batctl gw_mode server
 fi
-
+#Liste Update:
+if [ ! /var/www/FFNodeList/generateList.pl ]; then
+    git clone https://github.com/ffbsee/FFNodeList.git
+    mv FFNodeList /var/www/
+    echo '0 0 * * * root cd /var/www/FFNodeList; git pull > /dev/null' >> /etc/crontab
+fi
+/var/www/FFNodeList/generateList.pl
 echo "update done"
 
