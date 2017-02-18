@@ -183,6 +183,7 @@ if [ "$setup_webserver" = "true" ]; then
 		git clone https://github.com/ffbsee/FFNodeList.git
 		mv FFNodeList /var/www/
 		echo '0 0 * * * root cd /var/www/FFNodeList; git pull > /dev/null' >> /etc/crontab
+		sudo apt-get install --assume-yes libjson-pp-perl libwww-perl 
 	
 	}
 
