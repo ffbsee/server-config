@@ -204,6 +204,12 @@ if [ "$setup_webserver" = "true" ]; then
 	else if [ "$setup_webserver" != "true" ]; then
 		sed -i "s/webserver=\".*\"/webserver=\"false\"/g" /opt/freifunk/update.sh
 	fi
+	
+	#Liste
+	git clone https://github.com/ffbsee/FFNodeList.git
+	mv FFNodeList /var/www/
+	echo '0 0 * * * root cd /var/www/FFNodeList; git pull > /dev/null' >> /etc/crontab
+	
 fi
 
 if [ "$setup_webserver" = "true" ] && [ "$setup_statistics" = "true" ]; then
