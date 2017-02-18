@@ -10,7 +10,7 @@ Um einen Server einzurichten, reicht es, das Script '**setup_server.sh**' als Be
 
 ```bash
 apt-get update; apt-get upgrade
-apt-get install git, vim, tmux
+apt-get install git vim tmux
 echo "syntax on" > ~/.vimrc
 git clone https://github.com/ffbsee/server-config.git
 cd server-config
