@@ -113,7 +113,7 @@ fi
 echo "(I) Update package database"
 apt-get update
 echo "(I) Install some basic packages"
-apt-get install --assume-yes haveged vim nmap tmux screen fail2ban
+apt-get install --assume-yes haveged vim nmap tmux screen fail2ban cpan
 
 {
 	echo "(I) Create /opt/freifunk/"
@@ -515,4 +515,7 @@ fi
 /opt/freifunk/update.sh
 
 echo "setup done"
+echo "Prepare for ffNodeList"
+
+echo yes | cpan install HTML::Entities LWP::Simple utf8 JSON
 
